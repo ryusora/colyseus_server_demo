@@ -26,11 +26,12 @@ export class Player {
     }
 }
 
-export class TestRoom extends Room {
+export class TestRoom extends Room<State> {
     // this room supports only 4 clients connected
     maxClients = 4;
 
     onInit (options) {
+        console.log("TestRoom created!", options);
         this.setState(new State());
     }
 
