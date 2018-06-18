@@ -18,7 +18,7 @@ export class TestRoom extends Room {
 
     onMessage (client, data) {
         console.log("TestRoom received message from", client.sessionId, ":", data);
-        this.broadcast(`(${ client.sessionId }) ${ data.message }`);
+        this.broadcast(data);
     }
 
     onDispose () {
