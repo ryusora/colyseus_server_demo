@@ -14,7 +14,7 @@ export class State {
     }
 
     movePlayer (id: string, movement: any) {
-        this.players.set(movement);
+        this.players[ id ].set(movement);
     }
 }
 
@@ -49,7 +49,7 @@ export class TestRoom extends Room<State> {
     }
 
     onDispose () {
-        console.log("Dispose BasicRoom");
+        console.log("Dispose TestRoom");
     }
 
 }
