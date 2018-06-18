@@ -15,6 +15,7 @@ export class State {
 
     movePlayer (id: string, movement: any) {
         this.players[ id ].position = movement;
+        console.log("change position of player " + id + " to position " + JSON.stringify(movement));
     }
 }
 
