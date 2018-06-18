@@ -31,6 +31,7 @@ export class TestRoom extends Room {
     maxClients = 4;
 
     onInit (options) {
+        this.setState(new State());
     }
 
     onJoin (client) {
