@@ -14,16 +14,12 @@ export class State {
     }
 
     movePlayer (id: string, movement: any) {
-        this.players[ id ].set(movement);
+        this.players[ id ].position = movement;
     }
 }
 
 export class Player {
     position = {x:0, y:0};
-
-    set(pos) {
-        this.position = pos;
-    }
 }
 
 export class TestRoom extends Room<State> {
