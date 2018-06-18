@@ -1,24 +1,49 @@
-import { Room } from "colyseus";
+import { Room, EntityMap, nosync } from "colyseus";
+
+export class State {
+    players: EntityMap<Player> = {};
+
+    @nosync
+
+    createPlayer (id: string) {
+        this.players[ id ] = new Player();
+    }
+
+    removePlayer (id: string) {
+        delete this.players[ id ];
+    }
+
+    movePlayer (id: string, movement: any) {
+        this.players.set(movement);
+    }
+}
+
+export class Player {
+    position = {x:0, y:0};
+
+    set(pos) {
+        this.position = pos;
+    }
+}
 
 export class TestRoom extends Room {
     // this room supports only 4 clients connected
     maxClients = 4;
 
     onInit (options) {
-        console.log("TestRoom created!", options);
     }
 
     onJoin (client) {
-        this.broadcast(`${ client.sessionId } joined.`);
+        this.state.createPlayer(client.sessionId);
     }
 
     onLeave (client) {
-        this.broadcast(`${ client.sessionId } left.`);
+        this.state.removePlayer(client.sessionId);
     }
 
     onMessage (client, data) {
         console.log("TestRoom received message from", client.sessionId, ":", data);
-        this.broadcast(data);
+        this.state.movePlayer(client.sessionId, data);
     }
 
     onDispose () {
