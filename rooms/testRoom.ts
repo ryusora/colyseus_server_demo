@@ -8,17 +8,18 @@ export class State {
     }
 
     removePlayer (id: string) {
+        console.log("remove player " + id);
         delete this.players[ id ];
     }
 
     movePlayer (id: string, movement: any) {
-        this.players[ id ]["position"] = movement;
+        this.players[ id ]["position"] = JSON.stringify(movement);
         console.log("change position of player " + id + " to position ", this.players[ id ].position);
     }
 }
 
 export class Player {
-    position = {x:0, y:0};
+    position = JSON.stringify({x:0, y:0});
 }
 
 export class TestRoom extends Room<State> {
