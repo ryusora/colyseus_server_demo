@@ -3,8 +3,6 @@ import { Room, EntityMap, nosync } from "colyseus";
 export class State {
     players: EntityMap<Player> = {};
 
-    @nosync
-
     createPlayer (id: string) {
         this.players[ id ] = new Player();
     }
@@ -14,8 +12,8 @@ export class State {
     }
 
     movePlayer (id: string, movement: any) {
-        this.players[ id ].position = movement;
-        console.log("change position of player " + id + " to position " + JSON.stringify(movement));
+        this.players[ id ]["position"] = movement;
+        console.log("change position of player " + id + " to position " + this.players[ id ].position);
     }
 }
 
