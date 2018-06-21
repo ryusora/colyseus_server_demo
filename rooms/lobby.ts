@@ -11,12 +11,16 @@ export class LobbyRoom extends Room {
 
     onJoin (client, options) {
         if(options.contextID) {
-            if(!this.listRooms[options.contextID]) {
-                this.listRooms[options.contextID] = this.server.register(options.contextID, TestRoom);
-                console.log("Register Farm Room for " + options.contextID);
+            let contextID = options.contextID;
+            if(!this.listRooms[contextID]) {
+                this.listRooms[contextID] = this.server.register(contextID, TestRoom);
+                this.listRooms[contextID].onInit.addOnce(function(){
+                    this.send(client, {roomReady:true});
+                }.bind(this));
             }
             else {
-                console.log("Farm Room available for " + options.contextID);
+                console.log("Farm Room available for " + contextID);
+                this.send(client, {roomReady:true});
             }
         }
     }
