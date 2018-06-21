@@ -13,7 +13,7 @@ export class State {
     }
 
     setPlayerName(id: string, name: string) {
-        this.player[id].name = name;
+        this.players[id].name = name;
     }
 
     movePlayer (id: string, movement: any) {
