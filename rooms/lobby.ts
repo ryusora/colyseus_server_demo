@@ -28,7 +28,7 @@ export class LobbyRoom extends Room {
             this.send(client, {roomReady: true});
         }
     }
-    onContextRoomCreated(client) {
+    onContextRoomRegistered(client) {
         console.log("Room Created");
         this.send(client, {roomReady: true});
     }
