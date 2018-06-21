@@ -25,13 +25,15 @@ gameServer.register("testColyseus", TestRoom, {
     custom_options: "you can use me on Room#onInit"
 });
 
-let lobby = gameServer.register("lobby", LobbyRoom);
-
-lobby.registerEventJoin(function(client, options){
-  gameServer.register(options.contextID, TestRoom).on("create", function(room) {
-    lobby.onContextRoomCreated(room, client, options);
+gameServer.register("lobby", LobbyRoom).on("create", function(room){
+  console.log("On Lobby Room Created from index.js");
+  room.registerEventJoin(function(client, options) {
+    gameServer.register(options.contextID, TestRoom).on("create", function(room) {
+      room.onContextRoomCreated(room, client, options);
+    });
   });
 });
+
 gameServer.register("create_or_join", CreateOrJoinRoom);
 
 app.use('/', express.static(path.join(__dirname, "static")));
