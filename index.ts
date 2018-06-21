@@ -28,7 +28,6 @@ gameServer.register("testColyseus", TestRoom, {
 gameServer.register("lobby", LobbyRoom).on("create", function(room) {
   console.log("On Lobby Created from index.js");
   room.gameServer = gameServer;
-  app.use('/lobbyRoom', monitor(room.gameServer));
 });
 gameServer.register("create_or_join", CreateOrJoinRoom);
 
