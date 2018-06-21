@@ -27,7 +27,9 @@ gameServer.register("testColyseus", TestRoom, {
 
 gameServer.register("lobby", LobbyRoom).on("create", function(room){
   room.registerEventJoin(function(client, options) {
-    gameServer.register(options.contextID, TestRoom);
+    gameServer.register(options.contextID, TestRoom).on("create", function(){
+      app.use('/colyseus', monitor(gameServer)); // update monitor
+    });
     room.onContextRoomRegistered(client, options);
   });
 });
