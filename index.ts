@@ -25,8 +25,9 @@ gameServer.register("testColyseus", TestRoom, {
     custom_options: "you can use me on Room#onInit"
 });
 
-gameServer.register("lobby", LobbyRoom, {
-  server:gameServer
+gameServer.register("lobby", LobbyRoom).on("join", function(room, client, options) {
+  console.log(client, options);
+  room.send(client, {roomReady: true});
 });
 gameServer.register("create_or_join", CreateOrJoinRoom);
 
