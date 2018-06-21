@@ -25,7 +25,9 @@ gameServer.register("testColyseus", TestRoom, {
     custom_options: "you can use me on Room#onInit"
 });
 
-gameServer.register("lobby", LobbyRoom);
+gameServer.register("lobby", LobbyRoom, {
+  server:gameServer
+});
 gameServer.register("create_or_join", CreateOrJoinRoom);
 
 app.use('/', express.static(path.join(__dirname, "static")));
