@@ -12,6 +12,10 @@ export class State {
         delete this.players[ id ];
     }
 
+    setPlayerName(id: string, name: string) {
+        this.player[id].name = name;
+    }
+
     movePlayer (id: string, movement: any) {
         this.players[ id ]["position"] = JSON.stringify(movement);
         console.log("change position of player " + id + " to position ", this.players[ id ].position);
@@ -20,6 +24,7 @@ export class State {
 
 export class Player {
     position = JSON.stringify({x:0, y:0});
+    name = "Anonymous";
 }
 
 export class TestRoom extends Room<State> {
@@ -41,7 +46,10 @@ export class TestRoom extends Room<State> {
 
     onMessage (client, data) {
         console.log("TestRoom received message from", client.sessionId, ":", data);
-        this.state.movePlayer(client.sessionId, data);
+        if(data.name) {
+            this.state.setPlayerName(client.sessionId, data.name);
+        }else
+            this.state.movePlayer(client.sessionId, data);
     }
 
     onDispose () {
