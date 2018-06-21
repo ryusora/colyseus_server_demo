@@ -16,8 +16,10 @@ export class LobbyRoom extends Room {
     onJoin (client, options) {
         if(!this.listRooms[options.contextID]) {
             console.log("LobbyRoom OnJoin");
-            if(this.onJoinCallback)
+            if(this.onJoinCallback) {
                 this.onJoinCallback(client, options);
+                this.listRooms[options.contextID] = true;
+            }
             else
                 console.log("LobbyRoom OnJoincallback fail to call");
         }
@@ -26,9 +28,8 @@ export class LobbyRoom extends Room {
             this.send(client, {roomReady: true});
         }
     }
-    onContextRoomCreated(room, client, options) {
+    onContextRoomCreated(client) {
         console.log("Room Created");
-        this.listRooms[options.contextID] = room;
         this.send(client, {roomReady: true});
     }
     onLeave (client) {

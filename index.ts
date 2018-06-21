@@ -26,13 +26,12 @@ gameServer.register("testColyseus", TestRoom, {
 });
 
 gameServer.register("lobby", LobbyRoom).on("create", function(room){
-  console.log("On Lobby Room Created from index.js");
   room.registerEventJoin(function(client, options) {
-    gameServer.register(options.contextID, TestRoom).on("create", function(room) {
-      room.onContextRoomCreated(room, client, options);
-    });
+    gameServer.register(options.contextID, TestRoom);
+    room.onContextRoomRegistered(client, options);
   });
 });
+
 
 gameServer.register("create_or_join", CreateOrJoinRoom);
 
