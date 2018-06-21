@@ -9,17 +9,21 @@ export class LobbyRoom extends Room {
     }
 
     registerEventJoin(callback){
+        console.log("LobbyRoom Register Join callback");
         this.onJoinCallback = callback;
     }
 
     onJoin (client, options) {
         if(!this.listRooms[options.contextID]) {
+            console.log("LobbyRoom OnJoin");
             if(this.onJoinCallback)
                 this.onJoinCallback(client, options);
+            else
+                console.log("LobbyRoom OnJoincallback fail to call");
         }
         else {
             console.log("Room created already");
-            this.send(client, {roomReady: true});    
+            this.send(client, {roomReady: true});
         }
     }
     onContextRoomCreated(room, client, options) {
