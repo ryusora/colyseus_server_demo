@@ -14,7 +14,8 @@ export class LobbyRoom extends Room {
             let contextID = options.contextID;
             if(!this.listRooms[contextID]) {
                 this.listRooms[contextID] = this.server.register(contextID, TestRoom);
-                this.listRooms[contextID].onInit.addOnce(function(){
+                this.listRooms[contextID].on("create", function(room) {
+                    console.log("room create", room, " with context id " + contextID);
                     this.send(client, {roomReady:true});
                 }.bind(this));
             }
