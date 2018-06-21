@@ -8,6 +8,8 @@ import { monitor } from '@colyseus/monitor';
 
 // Import demo room handlers
 import { TestRoom } from './rooms/testRoom';
+import { CreateOrJoinRoom } from './rooms/04-create-or-join-room';
+import { LobbyRoom } from './rooms/lobby';
 const port = Number(process.env.PORT || 2567);
 const app = express();
 
@@ -22,6 +24,9 @@ const gameServer = new Server({
 gameServer.register("testColyseus", TestRoom, {
     custom_options: "you can use me on Room#onInit"
 });
+
+gameServer.register("lobby", LobbyRoom);
+gameServer.register("create_or_join", CreateOrJoinRoom);
 
 app.use('/', express.static(path.join(__dirname, "static")));
 app.use('/', serveIndex(path.join(__dirname, "static"), {'icons': true}))
