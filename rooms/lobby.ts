@@ -5,7 +5,7 @@ export class LobbyRoom extends Room {
     listRooms = {};
     server = null;
     onInit (options) {
-        console.log("LobbyRoom created!", options);
+        console.log("LobbyRoom created!");
         this.server = options.server;
     }
 
@@ -13,15 +13,19 @@ export class LobbyRoom extends Room {
         if(options.contextID) {
             let contextID = options.contextID;
             if(!this.listRooms[contextID]) {
-                this.listRooms[contextID] = this.server.register(contextID, TestRoom);
-                this.listRooms[contextID].on("create", function(room) {
+                console.log("Register Farm for " + contextID);
+                this.listRooms[contextID] = true;
+                this.server.register(contextID, TestRoom).on("create", function(room) {
                     console.log("room create", room, " with context id " + contextID);
+                    this.listRooms[contextID] = room;
                     this.send(client, {roomReady:true});
                 }.bind(this));
             }
             else {
-                console.log("Farm Room available for " + contextID);
-                this.send(client, {roomReady:true});
+                setTimeout(function(){
+                    console.log("Farm Room available for " + contextID);
+                    this.send(client, {roomReady:true});
+                }.bind(this), 1000); 
             }
         }
     }
