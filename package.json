@@ -4,8 +4,9 @@
   "description": "Usage Examples of Colyseus Game Server",
   "main": "index.js",
   "scripts": {
-    "start": "npm run tsc && npm run babel && npm run start-server",
+    "start": "npm run start-server",
     "start-server": "nodemon --watch 'dest/**/*.js' --exec node ./dest/index.js",
+    "build": "npm run tsc && npm run babel",
     "tsc": "tsc --outDir .dest-tsc",
     "babel": "babel .dest-tsc --out-dir dest --presets es2015 --no-comments"
   },
