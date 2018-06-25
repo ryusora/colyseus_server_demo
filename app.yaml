@@ -4,3 +4,5 @@ network:
     forwarded_ports:
       - 65080
     instance_tag: websocket
+environment:
+  - SERVER_PORT=65080

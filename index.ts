@@ -10,7 +10,7 @@ import { monitor } from '@colyseus/monitor';
 import { TestRoom } from './rooms/testRoom';
 import { CreateOrJoinRoom } from './rooms/04-create-or-join-room';
 import { LobbyRoom } from './rooms/lobby';
-const port = Number(process.env.PORT || 65080);
+const port = Number(process.env.SERVER_PORT || 65080);
 const app = express();
 
 // Attach WebSocket Server on HTTP Server.
