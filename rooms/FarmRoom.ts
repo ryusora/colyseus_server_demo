@@ -5,7 +5,7 @@ export class FarmRoom extends Room {
     roomID = null;
 
     onInit (options) {
-        console.log("Create room with ID: " options.roomID);
+        console.log("Create room with ID: " + options.roomID);
         this.roomID = options.roomID;
     }
 

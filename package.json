@@ -4,10 +4,10 @@
   "description": "Usage Examples of Colyseus Game Server",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --watch '**/*.ts' --exec ts-node index.ts",
-    "bundle-colyseus-client": "browserify ./node_modules/colyseus.js/lib/index.js -s Colyseus -o static/colyseus.js",
-    "build": "npm run bundle-colyseus-client",
-    "heroku-postbuild": "npm run build"
+    "start": "npm run tsc && npm run babel && npm run start-server",
+    "start-server": "nodemon --watch 'dest/**/*.js' --exec node ./dest/index.js",
+    "tsc": "tsc --outDir .dest-tsc",
+    "babel": "babel .dest-tsc --out-dir dest --presets es2015 --no-comments"
   },
   "engines": {
     "node": "8.9.1"
@@ -17,17 +17,23 @@
   "dependencies": {
     "@colyseus/monitor": "^0.1.7",
     "@types/uws": "^0.13.1",
+    "babel-polyfill": "^6.26.0",
     "colyseus": "^0.9.11",
     "colyseus.js": "^0.9.6",
     "express": "^4.14.0",
+    "mongodb": "^3.0.10",
     "nodemon": "^1.11.0",
     "serve-index": "^1.8.0",
     "superagent": "^3.8.1",
-    "uws": "^10.148.0"
+    "uws": "^10.148.0",
+    "webpack": "^4.12.1",
+    "webpack-cli": "^3.0.8"
   },
   "devDependencies": {
     "browserify": "^14.4.0",
     "ts-node": "^5.0.1",
-    "typescript": "^2.7.2"
+    "typescript": "^2.7.2",
+    "babel-cli": "^6.26.0",
+    "ts-babel-node": "^1.1.1"
   }
 }
