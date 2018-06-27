@@ -1,5 +1,1 @@
-node_modules
-npm-debug.log
-*.js
-.dest/
-.dest-tsc/
+/node_modules
